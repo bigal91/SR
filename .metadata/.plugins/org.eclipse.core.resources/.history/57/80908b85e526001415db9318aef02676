@@ -1,0 +1,338 @@
+
+/**
+ * ServiceRegistryServiceSkeleton.java
+ *
+ * This file was auto-generated from WSDL
+ * by the Apache Axis2 version: 1.6.2  Built on : Apr 17, 2012 (05:33:49 IST)
+ */
+    package de.stutt.ba.serviceregistry.serviceregistry;
+
+import java.util.Calendar;
+
+import model.ServiceConfiguration;
+import model.Token;
+import model.User;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
+
+import constants.EnvConfiguration;
+import util.AuthorizationUtil;
+import util.HibernateUtil;
+import util.Logger;
+    /**
+     *  ServiceRegistryServiceSkeleton java skeleton for the axisService
+     */
+    public class ServiceRegistryServiceSkeleton{
+        
+         
+        /**
+         * Auto generated method signature
+         * 
+                                     * @param registerUserRequestResource 
+             * @return booleanResource 
+         */
+        
+                 public de.stutt.ba.serviceregistry.serviceregistry.BooleanResource registerUser
+                  (
+                  de.stutt.ba.serviceregistry.serviceregistry.RegisterUserRequestResource registerUserRequestResource
+                  )
+            {
+             		Session hibSess = HibernateUtil.getSessionFactory().openSession();
+            		Transaction tx = hibSess.beginTransaction();
+            		try {
+            			RegisterUserRequestResource rs = registerUserRequestResource;
+            			User user = new User(rs.localName, rs.localPassword, rs.localEMail);
+            			hibSess.save(user);
+            			tx.commit();
+            			return getBoolRes(true);
+            		} catch (Exception e) {
+            			Logger.log("Could not save User.");
+            			return getBoolRes(false);
+            		} finally {
+            			hibSess.close();
+            		}
+        }
+     
+         
+        /**
+         * Auto generated method signature
+         * 
+                                     * @param string 
+             * @return abstractService 
+         */
+        
+                 public de.stutt.ba.serviceregistry.serviceregistry.AbstractService searchByServiceConfiguration
+                  (
+                  java.lang.String serviceConfigurationName
+                  )
+            {
+             		Session hibSess = HibernateUtil.getSessionFactory().openSession();
+            		try {
+            			Criteria configCriteria = hibSess
+            					.createCriteria(ServiceConfiguration.class);
+            			configCriteria.add(Restrictions
+            					.eq("name", serviceConfigurationName));
+            			// unique Result! Dont allow same names for different
+            			// ServiceConfigurations!
+            			ServiceConfiguration config = (ServiceConfiguration) configCriteria
+            					.uniqueResult();
+            			return loadServicesByCriteria("serviceConfiguration", config,
+            					hibSess);
+            		} catch (Exception e) {
+            			Logger.log("Could not search By ServiceConfiguration, something went wrong.");
+            			return new AbstractService();
+            		} finally {
+            			hibSess.close();
+            		}
+        }
+     
+         
+        /**
+         * Auto generated method signature
+         * 
+                                     * @param createServiceConfigurationWithInterfaceRequestResource 
+             * @return longResource 
+         */
+        
+                 public de.stutt.ba.serviceregistry.serviceregistry.LongResource createServiceConfigurationWithInterface
+                  (
+                  de.stutt.ba.serviceregistry.serviceregistry.CreateServiceConfigurationWithInterfaceRequestResource createServiceConfigurationWithInterfaceRequestResource
+                  )
+            {
+                //TODO : fill this with the necessary business logic
+                throw new  java.lang.UnsupportedOperationException("Please implement " + this.getClass().getName() + "#createServiceConfigurationWithInterface");
+        }
+     
+         
+        /**
+         * Auto generated method signature
+         * 
+                                     * @param loginUserRequestResource 
+             * @return string0 
+         */
+        
+                 public java.lang.String loginUser
+                  (
+                  de.stutt.ba.serviceregistry.serviceregistry.LoginUserRequestResource loginUserRequestResource
+                  )
+            {
+             		Session hibSess = HibernateUtil.getSessionFactory().openSession();
+            		try {
+            			Criteria criteria = hibSess.createCriteria(User.class);
+            			criteria.add(Restrictions.eq("userName",
+            					loginUserRequestResource.localName.toLowerCase()));
+            			criteria.add(Restrictions.eq("userPassword", AuthorizationUtil
+            					.scramblePassword(loginUserRequestResource.localPassword)));
+            			User user = (User) criteria.uniqueResult();
+            			if (user != null) {
+            				Token token = Token.createToken(
+            						Integer.parseInt(EnvConfiguration.getTokenLength()),
+            						null);
+            				Calendar cal = Calendar.getInstance();
+            				cal.add(Calendar.HOUR_OF_DAY, Integer.parseInt(EnvConfiguration
+            						.getTokenMinuteDuration()));
+            				token.setValidUntil(cal.getTimeInMillis());
+            				return token.getToken();
+            			} else {
+            				return "";
+            			}
+            		} catch (Exception e) {
+            			Logger.err("Could not login User, something went wrong.");
+            			return "";
+            		} finally {
+            			hibSess.close();
+            		}
+        }
+     
+         
+        /**
+         * Auto generated method signature
+         * 
+                                     * @param createProvisionedServiceRequestResource 
+             * @return longResource1 
+         */
+        
+                 public de.stutt.ba.serviceregistry.serviceregistry.LongResource createProvisionedService
+                  (
+                  de.stutt.ba.serviceregistry.serviceregistry.CreateProvisionedServiceRequestResource createProvisionedServiceRequestResource
+                  )
+            {
+                //TODO : fill this with the necessary business logic
+                throw new  java.lang.UnsupportedOperationException("Please implement " + this.getClass().getName() + "#createProvisionedService");
+        }
+     
+         
+        /**
+         * Auto generated method signature
+         * 
+                                     * @param editNotProvisionedServiceRequestResource 
+             * @return booleanResource2 
+         */
+        
+                 public de.stutt.ba.serviceregistry.serviceregistry.BooleanResource editNotProvisionedDedicatedService
+                  (
+                  de.stutt.ba.serviceregistry.serviceregistry.EditNotProvisionedServiceRequestResource editNotProvisionedServiceRequestResource
+                  )
+            {
+                //TODO : fill this with the necessary business logic
+                throw new  java.lang.UnsupportedOperationException("Please implement " + this.getClass().getName() + "#editNotProvisionedDedicatedService");
+        }
+     
+         
+        /**
+         * Auto generated method signature
+         * 
+                                     * @param string3 
+             * @return abstractService4 
+         */
+        
+                 public de.stutt.ba.serviceregistry.serviceregistry.AbstractService searchByProvider
+                  (
+                  java.lang.String string3
+                  )
+            {
+                //TODO : fill this with the necessary business logic
+                throw new  java.lang.UnsupportedOperationException("Please implement " + this.getClass().getName() + "#searchByProvider");
+        }
+     
+         
+        /**
+         * Auto generated method signature
+         * 
+                                     * @param createServiceInterfaceRequestResource 
+             * @return longResource5 
+         */
+        
+                 public de.stutt.ba.serviceregistry.serviceregistry.LongResource createServiceInterface
+                  (
+                  de.stutt.ba.serviceregistry.serviceregistry.CreateServiceInterfaceRequestResource createServiceInterfaceRequestResource
+                  )
+            {
+                //TODO : fill this with the necessary business logic
+                throw new  java.lang.UnsupportedOperationException("Please implement " + this.getClass().getName() + "#createServiceInterface");
+        }
+     
+         
+        /**
+         * Auto generated method signature
+         * 
+                                     * @param editNotProvisionedServiceRequestResource6 
+             * @return booleanResource7 
+         */
+        
+                 public de.stutt.ba.serviceregistry.serviceregistry.BooleanResource editNotProvisionedSharedService
+                  (
+                  de.stutt.ba.serviceregistry.serviceregistry.EditNotProvisionedServiceRequestResource editNotProvisionedServiceRequestResource6
+                  )
+            {
+                //TODO : fill this with the necessary business logic
+                throw new  java.lang.UnsupportedOperationException("Please implement " + this.getClass().getName() + "#editNotProvisionedSharedService");
+        }
+     
+         
+        /**
+         * Auto generated method signature
+         * 
+                                     * @param createServiceConfigurationRequestResource 
+             * @return longResource8 
+         */
+        
+                 public de.stutt.ba.serviceregistry.serviceregistry.LongResource createServiceConfiguration
+                  (
+                  de.stutt.ba.serviceregistry.serviceregistry.CreateServiceConfigurationRequestResource createServiceConfigurationRequestResource
+                  )
+            {
+                //TODO : fill this with the necessary business logic
+                throw new  java.lang.UnsupportedOperationException("Please implement " + this.getClass().getName() + "#createServiceConfiguration");
+        }
+     
+         
+        /**
+         * Auto generated method signature
+         * 
+                                     * @param string9 
+             * @return abstractService10 
+         */
+        
+                 public de.stutt.ba.serviceregistry.serviceregistry.AbstractService searchByQualifiedPortTypeName
+                  (
+                  java.lang.String string9
+                  )
+            {
+                //TODO : fill this with the necessary business logic
+                throw new  java.lang.UnsupportedOperationException("Please implement " + this.getClass().getName() + "#searchByQualifiedPortTypeName");
+        }
+     
+         
+        /**
+         * Auto generated method signature
+         * 
+                                     * @param createNotProvisionedServiceRequestResource 
+             * @return longResource11 
+         */
+        
+                 public de.stutt.ba.serviceregistry.serviceregistry.LongResource createNotProvisionedDedicatedService
+                  (
+                  de.stutt.ba.serviceregistry.serviceregistry.CreateNotProvisionedServiceRequestResource createNotProvisionedServiceRequestResource
+                  )
+            {
+                //TODO : fill this with the necessary business logic
+                throw new  java.lang.UnsupportedOperationException("Please implement " + this.getClass().getName() + "#createNotProvisionedDedicatedService");
+        }
+     
+         
+        /**
+         * Auto generated method signature
+         * 
+                                     * @param longResource12 
+             * @return booleanResource13 
+         */
+        
+                 public de.stutt.ba.serviceregistry.serviceregistry.BooleanResource deleteService
+                  (
+                  de.stutt.ba.serviceregistry.serviceregistry.LongResource longResource12
+                  )
+            {
+                //TODO : fill this with the necessary business logic
+                throw new  java.lang.UnsupportedOperationException("Please implement " + this.getClass().getName() + "#deleteService");
+        }
+     
+         
+        /**
+         * Auto generated method signature
+         * 
+                                     * @param createNotProvisionedServiceRequestResource14 
+             * @return longResource15 
+         */
+        
+                 public de.stutt.ba.serviceregistry.serviceregistry.LongResource createNotProvisionedSharedService
+                  (
+                  de.stutt.ba.serviceregistry.serviceregistry.CreateNotProvisionedServiceRequestResource createNotProvisionedServiceRequestResource14
+                  )
+            {
+                //TODO : fill this with the necessary business logic
+                throw new  java.lang.UnsupportedOperationException("Please implement " + this.getClass().getName() + "#createNotProvisionedSharedService");
+        }
+     
+         
+        /**
+         * Auto generated method signature
+         * 
+                                     * @param editProvisionedServiceRequestResource 
+             * @return booleanResource16 
+         */
+        
+                 public de.stutt.ba.serviceregistry.serviceregistry.BooleanResource editProvisionedService
+                  (
+                  de.stutt.ba.serviceregistry.serviceregistry.EditProvisionedServiceRequestResource editProvisionedServiceRequestResource
+                  )
+            {
+                //TODO : fill this with the necessary business logic
+                throw new  java.lang.UnsupportedOperationException("Please implement " + this.getClass().getName() + "#editProvisionedService");
+        }
+     
+    }
+    

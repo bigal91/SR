@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<list key="1/org.eclipse.jst.ws.wsImpl.java">
+		<item value="/SecondTry/toBuildpath/ServiceRegistryService.wsdl"/>
+		<item value="/FirstTry/toBuildpath/ServiceRegistryService.wsdl"/>
+		<item value="/SR/toBuildpath/ServiceRegistryService.wsdl"/>
+		<item value="/SR/toBuildpath/PasswordPolicyService.wsdl"/>
+	</list>
+</section>

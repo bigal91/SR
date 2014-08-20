@@ -1,0 +1,15 @@
+1407158080271	Encapsulate field 'token'
+1407175571943	Rename type 'BindingEncodingType'
+1407175612573	Rename type 'BindingProtocolType'
+1407175625347	Rename type 'ProtocolTzpe'
+1407175800655	Rename field 'wsdlAdress'
+1407175817944	Rename method 'getWsdlAdress'
+1407176378129	Encapsulate field 'RepositoryType'
+1407183636491	Encapsulate field 'bindingId'
+1407183938834	Encapsulate field 'instanceList'
+1407183952174	Encapsulate field 'instanceList'
+1407327629311	Copy file
+1407335581288	Copy packages
+1407335641980	Copy folders
+1407335725571	Copy folders
+1407335909478	Copy folder

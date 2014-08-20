@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="PasswordPolicy" targetNamespace="http://serviceregistry.ba.stutt.de/ServiceRegistry" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://serviceregistry.ba.stutt.de/ServiceRegistry" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <types>
+    <xs:schema targetNamespace="http://serviceregistry.ba.stutt.de/ServiceRegistry">
+				<xs:complexType name="MapModel">
+					<xs:sequence>
+						<xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="key" minOccurs="0" type="xs:string"/>
+									<xs:element name="value" minOccurs="0" type="xs:string"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			
+				<xs:simpleType name="EncodeType">
+    				<xs:restriction base="xs:string">
+     					<xs:enumeration value="SOAP"/>
+      					<xs:enumeration value="XML"/>
+     					<xs:enumeration value="JSON"/>
+     					<xs:enumeration value="HTTP_REST"/>
+     					<xs:enumeration value="CSV"/>
+     					<xs:enumeration value="BINARY"/>
+    				</xs:restriction>
+  				</xs:simpleType>
+			
+				<xs:simpleType name="ProtocolType">
+    				<xs:restriction base="xs:string">
+     					<xs:enumeration value="HTTP"/>
+      					<xs:enumeration value="HTTPS"/>
+     					<xs:enumeration value="SMTP"/>
+     					<xs:enumeration value="TCP"/>
+     					<xs:enumeration value="XMPP"/>
+     					<xs:enumeration value="JMS"/>
+    				</xs:restriction>
+  				</xs:simpleType>
+			
+
+			
+			<xs:element name="AbstractService">
+				<xs:complexType>
+					<xs:sequence minOccurs="0" maxOccurs="unbounded">
+						<xs:element maxOccurs="1" minOccurs="1" name="name" type="xs:string"/>
+						<xs:element maxOccurs="1" minOccurs="1" name="wsdlAddress" type="xs:string"/>
+						<xs:element name="encodeType">
+							<xs:simpleType>
+    							<xs:restriction base="xs:string">
+     						 		<xs:enumeration value="SOAP"/>
+      					 			<xs:enumeration value="XML"/>
+     					 			<xs:enumeration value="JSON"/>
+     					 			<xs:enumeration value="HTTP_REST"/>
+     					 			<xs:enumeration value="CSV"/>
+     					 			<xs:enumeration value="BINARY"/>
+    							</xs:restriction>
+  							</xs:simpleType>
+						</xs:element>
+						<xs:element name="protocolType">
+							<xs:simpleType>
+    							<xs:restriction base="xs:string">
+     						 		<xs:enumeration value="HTTP"/>
+      					 			<xs:enumeration value="HTTPS"/>
+     					 			<xs:enumeration value="SMTP"/>
+     					 			<xs:enumeration value="TCP"/>
+     					 			<xs:enumeration value="XMPP"/>
+     					 			<xs:enumeration value="JMS"/>
+    							</xs:restriction>
+  							</xs:simpleType>
+						</xs:element>
+						<xs:element maxOccurs="1" minOccurs="1" name="endPoint" type="xs:string"/>
+						<xs:element maxOccurs="1" minOccurs="1" name="packageAddress" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			
+			<xs:element name="PassResponse">
+				<xs:complexType>
+					<xs:all>
+						<xs:element maxOccurs="1" minOccurs="1" name="Password" type="xs:string"/>
+					</xs:all>
+				</xs:complexType>
+			</xs:element>
+			
+		<xs:element name="registerUserRequestResource">
+			<xs:complexType>
+				<xs:sequence>
+					<xs:element name="name" type="xs:string"/>
+					<xs:element name="password" type="xs:string"/>
+					<xs:element name="eMail" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+		</xs:element>
+		
+		<xs:element name="loginUserRequestResource">
+			<xs:complexType>
+				<xs:sequence>
+					<xs:element name="name" type="xs:string"/>
+					<xs:element name="password" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+		</xs:element>
+		
+		<xs:element name="createProvisionedServiceRequestResource">
+			<xs:complexType>
+				<xs:sequence>
+					<xs:element name="name" type="xs:string"/>
+					<xs:element name="wsdlAddress" type="xs:string"/>
+					<xs:element name="encodeType" type="tns:EncodeType" />
+					<xs:element name="protocolType" type="tns:ProtocolType" />
+					<xs:element name="endPoint" type="xs:string" />
+					<xs:element name="authToken" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+		</xs:element>
+		
+		<xs:element name="createNotProvisionedServiceRequestResource">
+			<xs:complexType>
+				<xs:sequence>
+					<xs:element name="name" type="xs:string"/>
+					<xs:element name="wsdlAddress" type="xs:string"/>
+					<xs:element name="encodeType" type="tns:EncodeType" />
+					<xs:element name="protocolType" type="tns:ProtocolType" />
+					<xs:element name="packageAddress" type="xs:string" />
+					<xs:element name="authToken" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+		</xs:element>
+		
+		<xs:element name="editProvisionedServiceRequestResource">
+			<xs:complexType>
+				<xs:sequence>
+					<xs:element name="serviceID" type="xs:long" />
+					<xs:element name="newName" type="xs:string"/>
+					<xs:element name="newWsdlAddress" type="xs:string"/>
+					<xs:element name="newEncodeType" type="tns:EncodeType" />
+					<xs:element name="newProtocolType" type="tns:ProtocolType" />
+					<xs:element name="newEndpoint" type="xs:string" />
+					<xs:element name="authToken" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+		</xs:element>
+		
+		<xs:element name="editNotProvisionedServiceRequestResource">
+			<xs:complexType>
+				<xs:sequence>
+					<xs:element name="serviceID" type="xs:long" />
+					<xs:element name="newName" type="xs:string"/>
+					<xs:element name="newWsdlAddress" type="xs:string"/>
+					<xs:element name="newEncodeType" type="tns:EncodeType" />
+					<xs:element name="newProtocolType" type="tns:ProtocolType" />
+					<xs:element name="newPackageAddress" type="xs:string" />
+					<xs:element name="authToken" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+		</xs:element>
+		
+		<xs:element name="createServiceConfigurationRequestResource">
+			<xs:complexType>
+				<xs:sequence>
+					<xs:element name="name" type="xs:string"/>
+					<xs:element name="wsdlAddress" type="xs:string"/>
+					<xs:element name="portTypeName" type="xs:string" />
+					<xs:element name="serviceQuality" type="tns:MapModel" />
+					<xs:element name="authToken" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+		</xs:element>
+		
+		<xs:element name="createServiceInterfaceRequestResource">
+			<xs:complexType>
+				<xs:sequence>
+					<xs:element name="qualifiedPortTypeName" type="xs:string"/>
+					<xs:element name="wsdlAddress" type="xs:string"/>
+					<xs:element name="description" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+		</xs:element>
+
+		<xs:element name="booleanResource" type="xs:boolean">
+		</xs:element>
+		
+		<xs:element name="longResource" type="xs:long">
+		</xs:element>
+		
+		</xs:schema>
+  </types>
+  
+  <message name="registerUserRequest">
+    <part name="name" element="tns:registerUserRequestResource"></part>
+  </message>
+  <message name="loginUserRequest">
+    <part name="name" element="tns:loginUserRequestResource"></part>
+  </message>
+  <message name="booleanResponse">
+    <part name="success" element="tns:booleanResource"></part>
+  </message>
+  <message name="stringResponse">
+    <part name="success" element="xs:string"></part>
+  </message>
+  <message name="serviceIDResource">
+    <part name="serviceID" element="tns:longResource"></part>
+  </message>
+  <message name="serviceConfigurationIDResource">
+    <part name="serviceID" element="tns:longResource"></part>
+  </message>
+  <message name="providerNameResource">
+    <part name="providerName" element="xs:string"></part>
+  </message>
+  <message name="configurationNameResource">
+    <part name="configurationName" element="xs:string"></part>
+  </message>
+  <message name="qualifiedPortTypeNameResource">
+    <part name="qualifiedPortTypeName" element="xs:string"></part>
+  </message>
+  <message name="createProvisionedServiceRequest">
+  	<part name="name" element="tns:createProvisionedServiceRequestResource"></part>
+  </message>
+  <message name="createNotProvisionedSharedServiceRequest">
+  	<part name="name" element="tns:createNotProvisionedServiceRequestResource"></part>
+  </message>
+  <message name="createNotProvisionedDedicatedServiceRequest">
+  	<part name="name" element="tns:createNotProvisionedServiceRequestResource"></part>
+  </message>
+  <message name="editProvisionedServiceRequest">
+  	<part name="serviceID" element="tns:editProvisionedServiceRequestResource"></part>
+  </message>
+  <message name="editNotProvisionedSharedServiceRequest">
+  	<part name="serviceID" element="tns:editNotProvisionedServiceRequestResource"></part>
+  </message>
+  <message name="editNotProvisionedDedicatedServiceRequest">
+  	<part name="serviceID" element="tns:editNotProvisionedServiceRequestResource"></part>
+  </message>
+  <message name="createServiceConfigurationRequest">
+  	<part name="name" element="tns:createServiceConfigurationRequestResource"></part>
+  </message>
+  <message name="createServiceInterfaceRequest">
+  	<part name="name" element="tns:createServiceInterfaceRequestResource"></part>
+  </message>
+  <message name="abstractServiceResponse">
+  	<part name="abstractServiceList" element="tns:AbstractService"></part>
+  </message>
+  <portType name="ServiceRegistry">
+  		<operation name="registerUser">
+      		<input message="tns:registerUserRequest">
+    		</input>
+      		<output message="tns:booleanResponse">
+    		</output>
+    	</operation>
+    	
+    	<operation name="loginUser">
+      		<input message="tns:loginUserRequest">
+    		</input>
+      		<output message="tns:stringResponse">
+    		</output>
+    	</operation>
+    	
+    	<operation name="createProvisionedService">
+      		<input message="tns:createProvisionedServiceRequest">
+    		</input>
+      		<output message="tns:serviceIDResource">
+    		</output>
+    	</operation>
+    	
+    	<operation name="createNotProvisionedSharedService">
+      		<input message="tns:createNotProvisionedSharedServiceRequest">
+    		</input>
+      		<output message="tns:serviceIDResource">
+    		</output>
+    	</operation>
+    	
+    	<operation name="createNotProvisionedDedicatedService">
+      		<input message="tns:createNotProvisionedDedicatedServiceRequest">
+    		</input>
+      		<output message="tns:serviceIDResource">
+    		</output>
+    	</operation>
+ 
+    	<operation name="editProvisionedService">
+      		<input message="tns:editProvisionedServiceRequest">
+    		</input>
+      		<output message="tns:booleanResponse">
+    		</output>
+    	</operation>
+    	
+     	<operation name="editNotProvisionedSharedService">
+      		<input message="tns:editNotProvisionedSharedServiceRequest">
+    		</input>
+      		<output message="tns:booleanResponse">
+    		</output>
+    	</operation>
+    	
+     	<operation name="editNotProvisionedDedicatedService">
+      		<input message="tns:editNotProvisionedDedicatedServiceRequest">
+    		</input>
+      		<output message="tns:booleanResponse">
+    		</output>
+    	</operation>
+    	
+      	<operation name="deleteService">
+      		<input message="tns:serviceIDResource">
+    		</input>
+      		<output message="tns:booleanResponse">
+    		</output>
+    	</operation>
+    	
+    	<operation name="createServiceInterface">
+    		<input messsage="tns:createServiceInterfaceRequest"></input>
+    		<output message="tns:booleanResponse"></output>
+    	</operation>
+    	
+    	<operation name="createServiceConfiguration">
+      		<input message="tns:createServiceConfigurationRequest">
+    		</input>
+      		<output message="tns:serviceConfigurationIDResource">
+    		</output>
+    	</operation>
+    	
+    	<operation name="searchByProvider">
+      		<input message="tns:providerNameResource">
+    		</input>
+      		<output message="tns:abstractServiceResponse">
+    		</output>
+    	</operation>
+    	
+    	<operation name="searchByServiceConfiguration">
+      		<input message="tns:configurationNameResource">
+    		</input>
+      		<output message="tns:abstractServiceResponse">
+    		</output>
+    	</operation>
+    	
+    	<operation name="searchByQualifiedPortTypeName">
+      		<input message="tns:qualifiedPortTypeNameResource">
+    		</input>
+      		<output message="tns:abstractServiceResponse">
+    		</output>
+    	</operation>
+  </portType>
+  <binding name="ServiceRegistrySOAP" type="tns:ServiceRegistry">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="registerUser">
+      <soap:operation soapAction="http://serviceregistry.ba.stutt.de/ServiceRegistry/registerUser"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="loginUser">
+      <soap:operation soapAction="http://serviceregistry.ba.stutt.de/ServiceRegistry/loginUser"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="createProvisionedService">
+      <soap:operation soapAction="http://serviceregistry.ba.stutt.de/ServiceRegistry/createProvisionedService"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="createNotProvisionedSharedService">
+      <soap:operation soapAction="http://serviceregistry.ba.stutt.de/ServiceRegistry/createNotProvisionedSharedService"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="createNotProvisionedDedicatedService">
+      <soap:operation soapAction="http://serviceregistry.ba.stutt.de/ServiceRegistry/createNotProvisionedDedicatedService"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="editProvisionedService">
+      <soap:operation soapAction="http://serviceregistry.ba.stutt.de/ServiceRegistry/editProvisionedService"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="editNotProvisionedSharedService">
+      <soap:operation soapAction="http://serviceregistry.ba.stutt.de/ServiceRegistry/editNotProvisionedSharedService"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="editNotProvisionedDedicatedService">
+      <soap:operation soapAction="http://serviceregistry.ba.stutt.de/ServiceRegistry/editNotProvisionedDedicatedService"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="deleteService">
+      <soap:operation soapAction="http://serviceregistry.ba.stutt.de/ServiceRegistry/deleteService"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="createServiceConfiguration">
+      <soap:operation soapAction="http://serviceregistry.ba.stutt.de/ServiceRegistry/createServiceConfiguration"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="searchByProvider">
+      <soap:operation soapAction="http://serviceregistry.ba.stutt.de/ServiceRegistry/searchByProvider"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="searchByServiceConfiguration">
+      <soap:operation soapAction="http://serviceregistry.ba.stutt.de/ServiceRegistry/searchByServiceConfiguration"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="searchByQualifiedPortTypeName">
+      <soap:operation soapAction="http://serviceregistry.ba.stutt.de/ServiceRegistry/searchByQualifiedPortTypeName"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="ServiceRegistryService">
+    <port name="ServiceRegistrySOAP" binding="tns:ServiceRegistrySOAP">
+      <soap:address location="http://localhost:8080/ServiceRegistry/services/ServiceRegistryService"/>
+    </port>
+  </service>
+</definitions>
