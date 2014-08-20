@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- This file was auto-generated from WSDL --><!-- by the Apache Axis2 version: 1.6.2  Built on : Apr 17, 2012 (05:33:49 IST) --><serviceGroup>
+    <service name="ServiceRegistryService">
+        <messageReceivers>
+            <messageReceiver mep="http://www.w3.org/ns/wsdl/in-out" class="de.stutt.ba.serviceregistry.serviceregistry.ServiceRegistryServiceMessageReceiverInOut"/>
+        </messageReceivers>
+        <parameter name="ServiceClass">de.stutt.ba.serviceregistry.serviceregistry.ServiceRegistryServiceSkeleton</parameter>
+        <parameter name="useOriginalwsdl">true</parameter>
+        <parameter name="modifyUserWSDLPortAddress">true</parameter>
+        <operation name="registerUser" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://serviceregistry.ba.stutt.de/ServiceRegistry">
+            <actionMapping>http://serviceregistry.ba.stutt.de/ServiceRegistry/registerUser</actionMapping>
+            <outputActionMapping>http://serviceregistry.ba.stutt.de/ServiceRegistry/ServiceRegistry/registerUserResponse</outputActionMapping>
+        </operation>
+        <operation name="searchByServiceConfiguration" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://serviceregistry.ba.stutt.de/ServiceRegistry">
+            <actionMapping>http://serviceregistry.ba.stutt.de/ServiceRegistry/searchByServiceConfiguration</actionMapping>
+            <outputActionMapping>http://serviceregistry.ba.stutt.de/ServiceRegistry/ServiceRegistry/searchByServiceConfigurationResponse</outputActionMapping>
+        </operation>
+        <operation name="createServiceConfigurationWithInterface" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://serviceregistry.ba.stutt.de/ServiceRegistry">
+            <actionMapping>http://serviceregistry.ba.stutt.de/ServiceRegistry/createServiceConfigurationWithInterface</actionMapping>
+            <outputActionMapping>http://serviceregistry.ba.stutt.de/ServiceRegistry/ServiceRegistry/createServiceConfigurationWithInterfaceResponse</outputActionMapping>
+        </operation>
+        <operation name="loginUser" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://serviceregistry.ba.stutt.de/ServiceRegistry">
+            <actionMapping>http://serviceregistry.ba.stutt.de/ServiceRegistry/loginUser</actionMapping>
+            <outputActionMapping>http://serviceregistry.ba.stutt.de/ServiceRegistry/ServiceRegistry/loginUserResponse</outputActionMapping>
+        </operation>
+        <operation name="createProvisionedService" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://serviceregistry.ba.stutt.de/ServiceRegistry">
+            <actionMapping>http://serviceregistry.ba.stutt.de/ServiceRegistry/createProvisionedService</actionMapping>
+            <outputActionMapping>http://serviceregistry.ba.stutt.de/ServiceRegistry/ServiceRegistry/createProvisionedServiceResponse</outputActionMapping>
+        </operation>
+        <operation name="editNotProvisionedDedicatedService" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://serviceregistry.ba.stutt.de/ServiceRegistry">
+            <actionMapping>http://serviceregistry.ba.stutt.de/ServiceRegistry/editNotProvisionedDedicatedService</actionMapping>
+            <outputActionMapping>http://serviceregistry.ba.stutt.de/ServiceRegistry/ServiceRegistry/editNotProvisionedDedicatedServiceResponse</outputActionMapping>
+        </operation>
+        <operation name="searchByProvider" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://serviceregistry.ba.stutt.de/ServiceRegistry">
+            <actionMapping>http://serviceregistry.ba.stutt.de/ServiceRegistry/searchByProvider</actionMapping>
+            <outputActionMapping>http://serviceregistry.ba.stutt.de/ServiceRegistry/ServiceRegistry/searchByProviderResponse</outputActionMapping>
+        </operation>
+        <operation name="createServiceInterface" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://serviceregistry.ba.stutt.de/ServiceRegistry">
+            <actionMapping>http://serviceregistry.ba.stutt.de/ServiceRegistry/createServiceInterface</actionMapping>
+            <outputActionMapping>http://serviceregistry.ba.stutt.de/ServiceRegistry/ServiceRegistry/createServiceInterfaceResponse</outputActionMapping>
+        </operation>
+        <operation name="editNotProvisionedSharedService" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://serviceregistry.ba.stutt.de/ServiceRegistry">
+            <actionMapping>http://serviceregistry.ba.stutt.de/ServiceRegistry/editNotProvisionedSharedService</actionMapping>
+            <outputActionMapping>http://serviceregistry.ba.stutt.de/ServiceRegistry/ServiceRegistry/editNotProvisionedSharedServiceResponse</outputActionMapping>
+        </operation>
+        <operation name="createServiceConfiguration" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://serviceregistry.ba.stutt.de/ServiceRegistry">
+            <actionMapping>http://serviceregistry.ba.stutt.de/ServiceRegistry/createServiceConfiguration</actionMapping>
+            <outputActionMapping>http://serviceregistry.ba.stutt.de/ServiceRegistry/ServiceRegistry/createServiceConfigurationResponse</outputActionMapping>
+        </operation>
+        <operation name="searchByQualifiedPortTypeName" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://serviceregistry.ba.stutt.de/ServiceRegistry">
+            <actionMapping>http://serviceregistry.ba.stutt.de/ServiceRegistry/searchByQualifiedPortTypeName</actionMapping>
+            <outputActionMapping>http://serviceregistry.ba.stutt.de/ServiceRegistry/ServiceRegistry/searchByQualifiedPortTypeNameResponse</outputActionMapping>
+        </operation>
+        <operation name="createNotProvisionedDedicatedService" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://serviceregistry.ba.stutt.de/ServiceRegistry">
+            <actionMapping>http://serviceregistry.ba.stutt.de/ServiceRegistry/createNotProvisionedDedicatedService</actionMapping>
+            <outputActionMapping>http://serviceregistry.ba.stutt.de/ServiceRegistry/ServiceRegistry/createNotProvisionedDedicatedServiceResponse</outputActionMapping>
+        </operation>
+        <operation name="deleteService" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://serviceregistry.ba.stutt.de/ServiceRegistry">
+            <actionMapping>http://serviceregistry.ba.stutt.de/ServiceRegistry/deleteService</actionMapping>
+            <outputActionMapping>http://serviceregistry.ba.stutt.de/ServiceRegistry/ServiceRegistry/deleteServiceResponse</outputActionMapping>
+        </operation>
+        <operation name="createNotProvisionedSharedService" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://serviceregistry.ba.stutt.de/ServiceRegistry">
+            <actionMapping>http://serviceregistry.ba.stutt.de/ServiceRegistry/createNotProvisionedSharedService</actionMapping>
+            <outputActionMapping>http://serviceregistry.ba.stutt.de/ServiceRegistry/ServiceRegistry/createNotProvisionedSharedServiceResponse</outputActionMapping>
+        </operation>
+        <operation name="editProvisionedService" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://serviceregistry.ba.stutt.de/ServiceRegistry">
+            <actionMapping>http://serviceregistry.ba.stutt.de/ServiceRegistry/editProvisionedService</actionMapping>
+            <outputActionMapping>http://serviceregistry.ba.stutt.de/ServiceRegistry/ServiceRegistry/editProvisionedServiceResponse</outputActionMapping>
+        </operation>
+    </service>
+</serviceGroup>
